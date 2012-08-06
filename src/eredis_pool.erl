@@ -118,6 +118,6 @@ q(PoolName, Command) ->
 
 q(PoolName, Command, Timeout) ->
     Worker = poolboy:checkout(PoolName),
-    poolboy:checkin(PoolName, Worker),
     Reply = eredis:q(Worker, Command, Timeout),
+    poolboy:checkin(PoolName, Worker),
     Reply.
